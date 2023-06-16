@@ -1,0 +1,10 @@
+<div *ngFor="let araba of arabalar">
+  <h2>{{ araba.Brand }}</h2>
+  <p>
+    <b>Marka:</b> {{ araba.Brand }} 
+    <b>Model:</b> {{ araba.Model }}
+    <b>Kategory:</b> {{ araba.CategoryName }} 
+    <b>Ücret:</b> {{ araba.Cost }}            
+  </p>
+  <img [src]="araba.Photo" alt="">
+</div>

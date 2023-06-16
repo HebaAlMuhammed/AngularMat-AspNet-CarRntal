@@ -1,0 +1,46 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false"   style="background-color: #3F51B5;color:white">
+    <mat-toolbar class="mat-elevation-z4" style="background-color: #3F51B5;color:white">Kategoriler</mat-toolbar>
+    
+  
+     
+      <mat-toolbar class="mat-elevation-z4" style="background-color: #3F51B5;color:white">Arabalar</mat-toolbar>
+     
+
+  
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="mat-elevation-z4">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>Get A Car</span>
+
+      <button mat-button [matMenuTriggerFor]="menu" matTooltip="Admin Ayarları"  *ngIf="apiServis.yetkiKontrol(['Admin'])"> 
+        <mat-icon>manage_accounts </mat-icon></button>
+      <button mat-button [routerLink]="['']"  matTooltip="Ana Sayfa ">  <mat-icon>home</mat-icon> </button>
+   
+    <button  mat-button [routerLink]="['/iletesim']" matTooltip="İletişim" > <mat-icon>call</mat-icon></button>
+     
+    <button mat-button [routerLink]="['/login']" *ngIf="!apiServis.oturumKontrol()">Otrum Ac</button>
+      <button mat-button [routerLink]="['/uye']" *ngIf="apiServis.oturumKontrol()">{{kadi}}</button>
+      <button mat-button (click)="OturumKapat()" *ngIf="apiServis.oturumKontrol()">Otrum Kapat</button>
+      <mat-menu #menu ="matMenu">
+        <button mat-menu-item [routerLink]="['admin/kategori']"> Kategoriler</button> 
+        <button mat-menu-item [routerLink]="['admin/araba']"> Arabalar</button> 
+        <button mat-menu-item [routerLink]="['admin/uye']">  Uyeler</button> 
+        <button mat-menu-item> Kayıtlar</button>   
+            
+
+      </mat-menu>
+      <mat-menu #altmenu="matMenu"></mat-menu>
+
+    </mat-toolbar>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

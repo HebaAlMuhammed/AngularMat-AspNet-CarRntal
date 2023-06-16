@@ -1,0 +1,60 @@
+<div class="container">
+  <p>&nbsp;</p>
+  <h1>&nbsp; Kullanıcılar</h1>
+  <button mat-fab matTooltip="Kullanıcı Ekle" color="primary" (click)="Ekle()">
+    <mat-icon aria-label="label">add</mat-icon>
+  </button>
+
+  <mat-form-field appearance="outline">
+    <input matInput placeholder="arama yap" (keyup)="Filterle($event)">
+  </mat-form-field>
+
+  <mat-table [dataSource]="dataSource" matSort>
+ 
+    <ng-container matColumnDef="UserName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Kullanıcı Adı</mat-header-cell>
+      <mat-cell *matCellDef="let kayit">{{kayit.UserName}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="NameSurname">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Adı Soyadı</mat-header-cell>
+      <mat-cell *matCellDef="let kayit">{{kayit.NameSurname}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Mail">
+      <mat-header-cell *matHeaderCellDef mat-sort-header="MailColumn">E-posta</mat-header-cell>
+      <mat-cell *matCellDef="let kayit">{{kayit.Mail}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Tel">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Cep Tel</mat-header-cell>
+      <mat-cell *matCellDef="let kayit">{{kayit.Tel}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Password">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Şifre</mat-header-cell>
+      <mat-cell *matCellDef="let kayit">{{kayit.Password}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Islemler">
+      <mat-header-cell *matHeaderCellDef>İşlemler</mat-header-cell>
+      <mat-cell *matCellDef="let kayit">
+        <button mat-icon-button color="primary" matTooltip="Listele">
+          <mat-icon aria-label="label">article</mat-icon>
+        </button>  
+        <button mat-icon-button color="primary" matTooltip="Düzenle" (click)="Duzenle(kayit)">
+          <mat-icon aria-label="label">edit</mat-icon>
+        </button>  
+        <button mat-icon-button color="accent" matTooltip="Sil">
+          <mat-icon aria-label="label">delete</mat-icon>
+        </button>  
+      </mat-cell>
+    </ng-container>
+
+    <!-- Header and Row Declarations -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[1, 5, 10, 20, 30, 100]" showFirstLastButtons></mat-paginator>
+</div>

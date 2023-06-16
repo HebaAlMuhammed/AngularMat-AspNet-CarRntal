@@ -1,0 +1,17 @@
+<mat-toolbar color = "primary" class="mat-elevation-z6">
+  <span>Fotğraf Güncelle</span>
+</mat-toolbar>
+<div class="container">
+  <img [src]="secilenFoto" *ngIf="secilenFoto"   
+  style="width: 200px;" />
+  <p>&nbsp;</p>
+<input type="file" name="" id="" hidden = "true"  onclick="this.value=null" #foto
+(change) ="FotoSec($event)" >
+<button mat-raised-button color="primary"
+ (click)="foto.click()"> Fotğraf sec </button>&nbsp;
+  <button mat-raised-button color="primary" 
+  (click)="fotoDialogRef.close(foto)">Kaydet</button>&nbsp;
+
+    <button mat-raised-button color="warn" 
+     (click)="fotoDialogRef.close()">iptal</button>
+</div>

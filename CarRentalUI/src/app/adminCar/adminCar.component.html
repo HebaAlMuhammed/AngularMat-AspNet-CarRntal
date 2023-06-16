@@ -1,0 +1,72 @@
+<div class="container">
+  <h2>Arabalar</h2>
+  <button mat-fab matTooltip="Araba Ekle" color="primary" 
+  (click)="Ekle()">
+    <mat-icon aria-label="label">add</mat-icon>
+  </button>
+
+  <mat-form-field appearance="outline" style="width: 50%;">
+    <mat-select  placeholder="Kategory SeçiniZ" (selectionChange)="KategoriSec($event.value)"
+    [value]="secKat">
+      <mat-option [value] = "kat" *ngFor="let kat of kategoriler">{{kat.CategoryName}}</mat-option>
+    </mat-select>
+
+  </mat-form-field>
+  <p>&nbsp;</p>
+  <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  
+    <ng-container matColumnDef="CarNo">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Araba Numarası</mat-header-cell>
+      <mat-cell *matCellDef="let kayit">{{kayit.CarNo}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Brand">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Araba Markası</mat-header-cell>
+      <mat-cell *matCellDef="let kayit">{{kayit.Brand}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Model">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Araba Modeli</mat-header-cell>
+      <mat-cell *matCellDef="let kayit">{{kayit.Model}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Date">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Ekleme Tarihi</mat-header-cell>
+      <mat-cell *matCellDef="let kayit">{{kayit.Date}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Ranted">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Araba Durumu</mat-header-cell>
+      <mat-cell *matCellDef="let kayit">{{kayit.Ranted}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Cost">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Araba Ücreti</mat-header-cell>
+      <mat-cell *matCellDef="let kayit">{{kayit.Cost}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Photo">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Resim</mat-header-cell>
+      <mat-cell *matCellDef="let kayit">
+        <img src="{{apiServis.siteUrl+'/dosyalar/'+ kayit.Photo}}" style="width: 70px;"
+        matTooltip="Fotoğraf Güncellemek için tıklayın" 
+        (click)=" FotoGuncelle(kayit)" />
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Detay">
+      <mat-header-cell *matHeaderCellDef>İşlemler</mat-header-cell>
+      <mat-cell *matCellDef="let kayit">
+        <button mat-icon-button color="primary" matTooltip="Araç Listele" (click)="Detay(kayit)">
+          <mat-icon aria-label="label">search</mat-icon>
+        </button>  
+        <button mat-icon-button color="primary" matTooltip="Araba Bilgileri Düzenle" (click)="Duzenle(kayit)">
+          <mat-icon aria-label="label">edit</mat-icon>
+        </button>  
+        <button mat-icon-button color="accent" matTooltip="Araba Sil" (click)="Sil(kayit)">
+          <mat-icon aria-label="label">delete</mat-icon>
+        </button>  
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20, 30, 100]" showFirstLastButtons>
+  </mat-paginator>
+</div>
